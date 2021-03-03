@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>미디어쿼리를 이용한 맙춤형 스타일</title>
+        <link href="mobile.css" rel="stylesheet" type="text/css" media="screen and (max-width:799px)">
+        <link href="pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:800px)">
+        <style>
+            @font-face{font-family:Namsan; src:url("08SeoulNamsanB_0.ttf")}
+            p{
+                font-family:Namsan;
+            }
+            h1{
+                font-family:'궁서체';
+            }
+        </style>
+    </head>
+    <body>
+        <div id="pc_view">
+            <h1>데스크탑 화면</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam dolorem molestias id optio nemo! Illum natus sunt libero illo quis alias soluta quo, optio quas ipsa, asperiores molestiae laboriosam suscipit enim dolorem ex? Facere saepe molestias optio rerum aspernatur quis tempore officia, pariatur odit, expedita accusamus cumque tempora voluptate repudiandae?</p>
+        </div>
+        <div id="mobile_view">
+            <h1>모바일 화면</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur cumque id sed in perferendis, qui nihil aspernatur sint numquam ipsam recusandae aliquid, at ducimus, possimus placeat praesentium quibusdam inventore rem?</p>
+        </div>
+    </body>
+</html>
