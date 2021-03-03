@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+        <title>도서검색</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    </head>
+    <body>
+        <div data-role="page">
+            <div data-role="header" data-theme="d"><h2>도서검색</h2></div>
+            <div data-role="content">
+                <div><input type="text" id="txtQuery" value="자바"/></div>
+                <ul data-role="listview" id="list" style="margin:20px auto;"></ul>
+                <script id="temp" type="text/x-handlebars-template">
+                    {{#each documents}}
+                        <li><a href=""><img src="{{thumbnail}}" width=50px height=70px/>{{{title}}}</a></li>
+                    {{/each}}
+                </script>
+                <input type="button" id="btnMore" value="더 보기"/>
+            </div>
+            <div data-role="footer" data-theme="d"><h2>인천일보아카데미</h2></div>
+        </div>
+    </body>
+    <script>
+        var size=10;
+        getList();
+        $("#txtQuery").on("keydown",function(e){
+            if(e.keyCode==13){
+                size=10;
+                getList();
+            }
+        });
+        $("#btnMore").on("click",function(){
+            size+=5;
+            getList();
+        });
+        function getList(){
+            var query=$("#txtQuery").val();
+            $.ajax({
+                type:"get",
+                url:"https://dapi.kakao.com/v3/search/book?target=title",
+                headers:{"Authorization":"KakaoAK 86bcfbe2e730c6fd61219287087b0991"},
+                data:{"query":query,"size":size},
+                DataType:"json",
+                success:function(data){
+                    var temp=Handlebars.compile($("#temp").html());
+                    $("#list").html(temp(data)).listview("refresh");
+                }
+            });
+        }
+    </script>
+</html>
